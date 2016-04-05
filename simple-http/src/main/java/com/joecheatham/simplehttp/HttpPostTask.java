@@ -20,7 +20,9 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by Joe on 4/4/16.
+ * Handles HTTP POST operations asynchronously.
+ * @author <a href="https://github.com/joecheatham">joecheatham</a>
+ * @version 1.0
  */
 class HttpPostTask extends AsyncTask<String,Void,String> {
   protected SimpleHttpResponseHandler delegate;
