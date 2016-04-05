@@ -1,7 +1,9 @@
 package com.joecheatham.simplehttp;
 
 /**
- * Created by Joe on 4/4/16.
+ * HTTP response handler.
+ * @author <a href="https://github.com/joecheatham">joecheatham</a>
+ * @version 1.0
  */
 public interface SimpleHttpResponseHandler {
   public void onResponse(int responseCode, String responseBody);
