@@ -5,7 +5,9 @@ import android.util.Log;
 import java.util.Map;
 
 /**
- * Created by Joe on 4/4/16.
+ * Handles HTTP operations asynchronously.
+ * @author <a href="https://github.com/joecheatham">joecheatham</a>
+ * @version 1.0
  */
 public class SimpleHttp {
   public static final String TAG = "SimpleHttp";
