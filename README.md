@@ -27,10 +27,10 @@ First, make sure that you add
 to your Manifest file.
 
 To make a `GET` request:
-```
+```java
 SimpleHttp.get("http://example.com", new SimpleHttpResponseHandler() {
 	@Override
-    onResponse(int resultCode, String responseBody) {
+    public void onResponse(int resultCode, String responseBody) {
     	// to handle response as a JSONObject:
         JSONObject json = new JSONObject(responseBody);
         // to handle response as a JSONArray:
@@ -40,12 +40,12 @@ SimpleHttp.get("http://example.com", new SimpleHttpResponseHandler() {
 ```
 
 To make a `POST` request:
-```
-Map<String, String> params = new HashMap<String, String>();
-params.put("paramName", "paramValue");
+```java
+Map<String, String> params = new HashMap<>();
+params.put("key", "value");
 SimpleHttp.post("http://example.com", params, new SimpleHttpResponseHandler() {
 	@Override
-    onResponse(int resultCode, String responseBody) {
+    public void onResponse(int responseCode, String responseBody) {
     	// to handle response as a JSONObject:
         JSONObject json = new JSONObject(responseBody);
         // to handle response as a JSONArray:
@@ -53,3 +53,5 @@ SimpleHttp.post("http://example.com", params, new SimpleHttpResponseHandler() {
     }
 });
 ```
+## Example
+[Example App](https://github.com/joecheatham/SimpleHttp/tree/master/sampleapp)
