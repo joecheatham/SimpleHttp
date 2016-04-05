@@ -13,7 +13,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by Joe on 4/4/16.
+ * Handles HTTP GET operations asynchronously.
+ * @author <a href="https://github.com/joecheatham">joecheatham</a>
+ * @version 1.0
  */
 class HttpGetTask extends AsyncTask<String,Void,String> {
   protected SimpleHttpResponseHandler delegate;
