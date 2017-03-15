@@ -25,13 +25,18 @@ import javax.net.ssl.HttpsURLConnection;
  * @version 1.0
  */
 class HttpPostTask extends AsyncTask<String,Void,String> {
-  protected SimpleHttpResponseHandler delegate;
-  protected Map<String, String> data;
-  protected int responseCode;
+  protected SimpleHttpResponseHandler mDelagate;
+  protected Map<String, String> mBody;
+  protected Map<String, String> mHeaders;
+  protected int mResponseCode;
 
-  public HttpPostTask(Map<String, String> data, SimpleHttpResponseHandler delegate) {
-    this.delegate = delegate;
-    this.data = data;
+  public HttpPostTask(
+      Map<String, String> data,
+      Map<String, String> headers,
+      SimpleHttpResponseHandler delegate) {
+    mDelagate = delegate;
+    mBody = data;
+    mHeaders = headers;
   }
 
   protected String doInBackground(String... urls) {
@@ -46,18 +51,24 @@ class HttpPostTask extends AsyncTask<String,Void,String> {
       urlConnection.setDoInput(true);
       urlConnection.setDoOutput(true);
 
+      if (mHeaders != null) {
+        for (Map.Entry<String, String> header : mHeaders.entrySet()) {
+          urlConnection.setRequestProperty(header.getKey(), header.getValue());
+        }
+      }
+
       OutputStream os = urlConnection.getOutputStream();
       BufferedWriter writer = new BufferedWriter(
           new OutputStreamWriter(os, "UTF-8"));
-      writer.write(getPostDataString(data));
+      writer.write(getPostDataString(mBody));
 
       writer.flush();
       writer.close();
       os.close();
 
-      responseCode = urlConnection.getResponseCode();
+      mResponseCode = urlConnection.getResponseCode();
 
-      if (responseCode == HttpsURLConnection.HTTP_OK) {
+      if (mResponseCode == HttpsURLConnection.HTTP_OK) {
         String line;
         BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream
             ()));
@@ -83,8 +94,8 @@ class HttpPostTask extends AsyncTask<String,Void,String> {
   }
 
   protected void onPostExecute(String result) {
-    Log.d(SimpleHttp.TAG, "POST response: " + responseCode + " received");
-    delegate.onResponse(responseCode, result);
+    Log.d(SimpleHttp.TAG, "POST response: " + mResponseCode + " received");
+    mDelagate.onResponse(mResponseCode, result);
   }
 
   private String getPostDataString(Map<String, String> params) throws UnsupportedEncodingException {
