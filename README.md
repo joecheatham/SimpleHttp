@@ -16,7 +16,7 @@ allprojects {
 ### Add the following dependency to your app's build.gradle file
 ```
 dependencies {
-	        compile 'com.github.joecheatham:SimpleHttp:v1.0'
+	        compile 'com.github.joecheatham:SimpleHttp:v1.1'
 	}
 ```
 ## Usage
